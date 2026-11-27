@@ -1,0 +1,1 @@
+(function(){try{var d=document.documentElement,t=localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';d.dataset.theme=t;var l=localStorage.getItem('lang')||((navigator.language||'en').toLowerCase().indexOf('ar')===0?'ar':'en');d.lang=l;d.dir=l==='ar'?'rtl':'ltr';}catch(e){}})();
