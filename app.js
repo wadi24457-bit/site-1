@@ -8,12 +8,12 @@
       work: 'View my work', touch: 'Get in touch', aboutE: 'About me', interests: 'Interests', skillsE: 'What I do', portE: 'Selected work', blogE: 'Writing', langE: 'Languages I speak', contE: "Let's talk",
       all: 'All', noProj: 'Projects will appear here soon.', noPost: 'Articles will appear here soon.', visit: 'Visit', watch: 'Watch video', read: 'Read article',
       name: 'Your name', email: 'Your email', msg: 'Message', send: 'Send message', sending: 'Sending...', sent: 'Thank you. Your message was sent.', fail: 'Could not send. Please check the fields and try again.',
-      wa: 'WhatsApp', mail: 'Email', cdesc: 'Send me a message and I will reply as soon as I can.', theme: 'Theme', rights: 'All rights reserved.', other: 'Other' },
+      wa: 'WhatsApp', mail: 'Email', loc: 'Location', cdesc: 'Send me a message and I will reply as soon as I can.', theme: 'Theme', rights: 'All rights reserved.', other: 'Other' },
     ar: { home: 'الرئيسية', about: 'من أنا', skills: 'المهارات', portfolio: 'أعمالي', blog: 'المدونة', languages: 'اللغات', contact: 'تواصل معي',
       work: 'استعرض أعمالي', touch: 'تواصل معي', aboutE: 'من أنا', interests: 'اهتماماتي', skillsE: 'ماذا أفعل', portE: 'أعمال مختارة', blogE: 'مقالات', langE: 'اللغات التي أتحدثها', contE: 'يسعدني تواصلك',
       all: 'الكل', noProj: 'ستظهر المشروعات هنا قريباً.', noPost: 'ستظهر المقالات هنا قريباً.', visit: 'زيارة', watch: 'شاهد الفيديو', read: 'اقرأ المقال',
       name: 'اسمك', email: 'بريدك الإلكتروني', msg: 'رسالتك', send: 'إرسال الرسالة', sending: 'جاري الإرسال...', sent: 'شكراً لك. تم إرسال رسالتك.', fail: 'تعذر الإرسال. راجع الحقول وحاول مرة أخرى.',
-      wa: 'واتساب', mail: 'البريد الإلكتروني', cdesc: 'أرسل لي رسالة وسأرد عليك في أقرب وقت.', theme: 'المظهر', rights: 'جميع الحقوق محفوظة.', other: 'أخرى' },
+      wa: 'واتساب', mail: 'البريد الإلكتروني', loc: 'الموقع', cdesc: 'أرسل لي رسالة وسأرد عليك في أقرب وقت.', theme: 'المظهر', rights: 'جميع الحقوق محفوظة.', other: 'أخرى' },
   };
   var t = function (k) { return T[lang][k]; };
   var pick = function (o, k) { return o[k + '_' + lang] || o[k + '_' + (lang === 'ar' ? 'en' : 'ar')] || ''; };
@@ -61,6 +61,7 @@
     if (p.whatsapp) cl += '<a class="clink" href="https://wa.me/' + esc(p.whatsapp) + '" target="_blank" rel="noopener noreferrer"><span class="ic">W</span><span><small>' + t('wa') + '</small>+' + esc(p.whatsapp) + '</span></a>';
     if (p.email) cl += '<a class="clink" href="mailto:' + esc(p.email) + '"><span class="ic">@</span><span><small>' + t('mail') + '</small>' + esc(p.email) + '</span></a>';
     (p.socials || []).forEach(function (s) { cl += '<a class="clink" href="' + esc(s.url) + '" target="_blank" rel="noopener noreferrer"><span class="ic">' + esc((s.label || '?')[0].toUpperCase()) + '</span><span>' + esc(s.label) + '</span></a>'; });
+    var loc = pick(p, 'location'); if (loc) cl += '<div class="clink" style="cursor:default"><span class="ic">📍</span><span><small>' + t('loc') + '</small>' + esc(loc) + '</span></div>';
     html += '<section id="contact"><div class="container"><p class="eyebrow">' + t('contact') + '</p><h2 class="reveal">' + t('contE') + '</h2><div class="contact-grid"><div class="contact-links reveal"><p style="color:var(--mute);margin:0 0 6px">' + t('cdesc') + '</p>' + cl + '</div>' +
       '<form class="cf reveal" id="cf" novalidate><label>' + t('name') + '<input name="name" required maxlength="120" autocomplete="name"></label><label>' + t('email') + '<input name="email" type="email" required maxlength="200" autocomplete="email"></label><label>' + t('msg') + '<textarea name="message" required maxlength="5000"></textarea></label><input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn primary" type="submit">' + t('send') + '</button><div class="note" id="note" role="status"></div></form></div></div></section>';
     $('#app').innerHTML = html;
